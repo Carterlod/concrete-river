@@ -6,6 +6,7 @@ using static Unity.VisualScripting.Member;
 
 public class HeronController : MonoBehaviour
 {
+
     [Header("Body & Movement")]
     InputAction moveBodyAction;
     InputAction moveHeadAction;
@@ -46,10 +47,12 @@ public class HeronController : MonoBehaviour
 
     private void Start()
     {
-        moveBodyAction = InputSystem.actions.FindAction("Move");
-        moveHeadAction = InputSystem.actions.FindAction("Look");
-        shoulderButtonRightAction = InputSystem.actions.FindAction("Snap");
-        shoulderButtonLeftAction = InputSystem.actions.FindAction("Step");
+        var inputActions = InputSystem.actions;
+        inputActions.Enable();
+        moveBodyAction = inputActions.FindAction("Move");
+        moveHeadAction = inputActions.FindAction("Look");
+        shoulderButtonRightAction = inputActions.FindAction("Snap");
+        shoulderButtonLeftAction = inputActions.FindAction("Step");
         initialCamPositionLocal = cam.transform.position;
         //initialHeadPos = head.localPosition;
         //initialHeadRotation = head.rotation;
