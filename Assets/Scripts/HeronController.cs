@@ -21,6 +21,9 @@ public class HeronController : MonoBehaviour
     [SerializeField]
     Transform heldFishPos;
 
+    [SerializeField]
+    Transform heldFishFinalPos;
+
     private float snapValueLastFrame = 0;
     private Vector3 initialHeadPos;
     [SerializeField] bool stepping = false;
@@ -82,10 +85,14 @@ public class HeronController : MonoBehaviour
             while (SnapValue() <= 0.5f){
                 yield return null;
             }
-            Debug.Log("Ate once");
+
+
+            fishController.transform.localRotation = Random.rotation;
+            fishController.transform.localPosition = Vector3.Lerp(Vector3.zero, heldFishFinalPos.localPosition, (i + 1) / 3f);
         }
-        Destroy(fishController.gameObject);
+        
         Instantiate(eatParticleSystem, heldFishPos.position, Quaternion.identity);
+        Destroy(fishController.gameObject);
         hasFish = false;
     }
     
