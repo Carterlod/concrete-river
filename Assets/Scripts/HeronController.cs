@@ -53,9 +53,8 @@ public class HeronController : MonoBehaviour
         moveHeadAction = inputActions.FindAction("Look");
         shoulderButtonRightAction = inputActions.FindAction("Snap");
         shoulderButtonLeftAction = inputActions.FindAction("Step");
-        initialCamPositionLocal = cam.transform.position;
-        //initialHeadPos = head.localPosition;
-        //initialHeadRotation = head.rotation;
+        initialCamPositionLocal = cam.transform.localPosition;
+        initialHeadPos = head.localPosition;
     }
     void Update()
     {
