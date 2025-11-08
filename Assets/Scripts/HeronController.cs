@@ -16,10 +16,7 @@ public class HeronController : MonoBehaviour
     [SerializeField] Transform headRestPos;
     [SerializeField] Vector3 headMovePose;
     [SerializeField] Transform headSnapPos;
-    [SerializeField] float bodyMovementSpeed = 1;
-    [SerializeField] float bodyRotationSpeed = 1;
-    [SerializeField] float headMovementSpeed = 1;
-    [SerializeField] float headTravelDistanceMax = 1;
+
     private float snapValueLastFrame = 0;
     private Vector3 initialHeadPos;
     [SerializeField] bool stepping = false;
@@ -29,12 +26,7 @@ public class HeronController : MonoBehaviour
     [Header("Camera")]
     [SerializeField] Camera cam;
     private Vector3 initialCamPositionLocal;
-    [SerializeField] float cameraHeadingOffsetFromHead = 1;
     [SerializeField] Transform cameraGoal;
-    [SerializeField] Vector2 FOVMinMax = new Vector2(11, 24);
-    [SerializeField] AnimationCurve camFoVCurve;
-    [SerializeField] float camBodyMovementSpeed = 5;
-    [SerializeField] float fovSmoothTime = 5;
     private float smoothedFovRange = 0;
 
     [Header("Animation")]
@@ -47,6 +39,9 @@ public class HeronController : MonoBehaviour
     [SerializeField] Transform camBodyTargetDown;
     [SerializeField] Transform camBodyTargetLeft;
     [SerializeField] Transform camBodyTargetRight;
+
+
+    [SerializeField] private HeronConfig config;
 
 
     private void Start()
@@ -76,7 +71,7 @@ public class HeronController : MonoBehaviour
         head.eulerAngles = newHeadDirection;
 
         //Camera positioning
-        Vector3 headOffset = cameraGoal.position - cameraGoal.right * cameraHeadingOffsetFromHead;
+        Vector3 headOffset = cameraGoal.position - cameraGoal.right * config.cameraHeadingOffsetFromHead;
         cam.transform.LookAt(headOffset);
         Vector3 newCamPos = initialCamPositionLocal;
         newCamPos.x = initialCamPositionLocal.x + 5f * -moveHeadValue.x;
@@ -85,13 +80,13 @@ public class HeronController : MonoBehaviour
         {
             newCamPos.y = 0;
         }
-        cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, newCamPos, Time.deltaTime * camBodyMovementSpeed);
+        cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, newCamPos, Time.deltaTime * config.camBodyMovementSpeed);
 
         //Camera FoV
         float fovRange = Mathf.InverseLerp(-1, 1, moveHeadValue.y);
-        fovRange = camFoVCurve.Evaluate(fovRange);
-        smoothedFovRange = Mathf.Lerp(smoothedFovRange, fovRange, Time.deltaTime * fovSmoothTime);
-        cam.fieldOfView = Mathf.Lerp(FOVMinMax.x, FOVMinMax.y, smoothedFovRange);
+        fovRange = config.camFoVCurve.Evaluate(fovRange);
+        smoothedFovRange = Mathf.Lerp(smoothedFovRange, fovRange, Time.deltaTime * config.fovSmoothTime);
+        cam.fieldOfView = Mathf.Lerp(config.FOVMinMax.x, config.FOVMinMax.y, smoothedFovRange);
 
         //Head move
         headMovePose = headRestPos.position;
@@ -144,9 +139,9 @@ public class HeronController : MonoBehaviour
             //Vector3 targetDirection = stepPos - root.position;
             //targetDirection.x = 0;
             //Quaternion targetRot = Quaternion.LookRotation(targetDirection);
-            root.rotation = Quaternion.Lerp(root.rotation, bodyRotTarget.rotation, t * bodyRotationSpeed);
+            root.rotation = Quaternion.Lerp(root.rotation, bodyRotTarget.rotation, t * config.bodyRotationSpeed);
 
-            root.position = Vector3.Lerp(startPos, stepPos, t* bodyMovementSpeed);
+            root.position = Vector3.Lerp(startPos, stepPos, t* config.bodyMovementSpeed);
             distanceToGoal = Vector3.Distance(root.position, stepPos);
             yield return null;
         }
