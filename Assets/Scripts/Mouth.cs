@@ -1,8 +1,14 @@
+using System;
 using UnityEngine;
 
 public class Mouth : MonoBehaviour
 {
     [SerializeField] ParticleSystem splashPS;
+    HeronController heronController;
+    private void Start()
+    {
+        heronController = GetComponentInParent<HeronController>();
+    }
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("water collision");
@@ -18,5 +24,16 @@ public class Mouth : MonoBehaviour
             splashPS.gameObject.transform.position = other.ClosestPoint(transform.position);
             splashPS.Play();
         }
+
+        var foundFish = other.GetComponentInParent<FishController>();
+        if(foundFish!=null && isSnapping){
+            heronController.GrabFish(foundFish);
+        }
+
     }
+    void OnTriggerStay( Collider other )
+    {
+
+    }
+    public bool isSnapping;
 }

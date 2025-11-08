@@ -1,29 +1,9 @@
 fileFormatVersion: 2
-guid: 64dcfbdbc36ade54e90c92073c12e6d1
+guid: 74cfd1a733b56314cb04df21ad9d9e92
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: concrete
-    second: {fileID: 2100000, guid: 8d6b25b984728714ab87525d8abeb2b0, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: land
-    second: {fileID: 2100000, guid: de38058c1cb62ad429654e9dc4a1f5d0, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: riverbed
-    second: {fileID: 2100000, guid: e069be615df76fa4296346f3e439d8d3, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: water
-    second: {fileID: 2100000, guid: 956bb6b3579d23643be3c6fd23c80eb2, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
