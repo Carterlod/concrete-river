@@ -18,6 +18,9 @@ public class HeronController : MonoBehaviour
     [SerializeField] Vector3 headMovePose;
     [SerializeField] Transform headSnapPos;
 
+    [SerializeField]
+    Transform heldFishPos;
+
     private float snapValueLastFrame = 0;
     private Vector3 initialHeadPos;
     [SerializeField] bool stepping = false;
@@ -41,9 +44,52 @@ public class HeronController : MonoBehaviour
     [SerializeField] Transform camBodyTargetLeft;
     [SerializeField] Transform camBodyTargetRight;
 
+    [SerializeField]
+    Mouth mouthController;
+
+    [SerializeField]
+    GameObject eatParticleSystem;
 
     [SerializeField] private HeronConfig config;
+    bool hasFish = false;
 
+    public void GrabFish(FishController fishController)
+    {
+        if(hasFish){
+            return;
+        }
+        StartCoroutine(HandleGrabbedFish(fishController));
+    }
+
+    IEnumerator HandleGrabbedFish(FishController fishController)
+    {
+        hasFish = true;
+        fishController.transform.SetParent(heldFishPos);
+        fishController.transform.localPosition = Vector3.zero;
+
+        float SnapValue()
+        {
+            return shoulderButtonRightAction.ReadValue<float>();
+        }
+        
+        for (var i = 0; i < 3; i++){
+
+            while (SnapValue() > 0.5f){
+                yield return null;
+            }
+
+
+            while (SnapValue() <= 0.5f){
+                yield return null;
+            }
+            Debug.Log("Ate once");
+        }
+        Destroy(fishController.gameObject);
+        Instantiate(eatParticleSystem, heldFishPos.position, Quaternion.identity);
+        hasFish = false;
+    }
+    
+    
 
     private void Start()
     {
@@ -88,7 +134,7 @@ public class HeronController : MonoBehaviour
         float fovRange = Mathf.InverseLerp(-1, 1, moveHeadValue.y);
         fovRange = config.camFoVCurve.Evaluate(fovRange);
         smoothedFovRange = Mathf.Lerp(smoothedFovRange, fovRange, Time.deltaTime * config.fovSmoothTime);
-        cam.fieldOfView = Mathf.Lerp(config.FOVMinMax.x, config.FOVMinMax.y, smoothedFovRange);
+        cam.fieldOfView = Mathf.LerpUnclamped(config.FOVMinMax.x, config.FOVMinMax.y, smoothedFovRange);
 
         //Head move
         headMovePose = headRestPos.position;
@@ -107,7 +153,18 @@ public class HeronController : MonoBehaviour
             //callRoutine = StartCoroutine(C_Call());
             beakAnimator.SetTrigger("call");
         }
+
+
+        if(snapValue - snapValueLastFrame > 0f){
+            mouthController.isSnapping = true;
+        }
+        else{
+            mouthController.isSnapping = false;
+        }
+        
+        
         snapValueLastFrame = snapValue;
+        
 
         //Stepping
         float stepValue = shoulderButtonLeftAction.ReadValue<float>();
