@@ -35,7 +35,6 @@ public class HeronController : MonoBehaviour
     private float smoothedFovRange = 0;
 
     [Header("Animation")]
-    [SerializeField] Animator beakAnimator;
     [SerializeField] Coroutine callRoutine;
     private bool cooldownActive = false;
 
@@ -157,7 +156,6 @@ public class HeronController : MonoBehaviour
         if(snapValue > 0 && snapValueLastFrame == 0)
         {
             //callRoutine = StartCoroutine(C_Call());
-            beakAnimator.SetTrigger("call");
         }
 
 
