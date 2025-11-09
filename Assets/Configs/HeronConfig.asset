@@ -53,3 +53,6 @@ MonoBehaviour:
   fovSmoothTime: 5
   cameraHeadingOffsetFromHead: -0.43
   FOVMinMax: {x: 5, y: 15}
+  headSnapDistance: 3
+  smoothedLookLambda: 5
+  openJawAngle: 40
