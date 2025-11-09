@@ -105,7 +105,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -121,6 +121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8888516892212430060}
   - component: {fileID: 6047070611847159594}
+  - component: {fileID: 8658433210664100544}
   m_Layer: 0
   m_Name: Fish
   m_TagString: Untagged
@@ -158,6 +159,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FishController
   config: {fileID: 11400000, guid: 164b40a8db20d8348815dbcff64526b5, type: 2}
+  thisAgent: {fileID: 8658433210664100544}
+--- !u!195 &8658433210664100544
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8124766070624678874}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &6582146102602461443
 PrefabInstance:
   m_ObjectHideFlags: 0

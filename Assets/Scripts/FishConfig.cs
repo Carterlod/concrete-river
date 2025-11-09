@@ -4,6 +4,7 @@ using UnityEngine;
 [CreateAssetMenu()]
 public class FishConfig : ScriptableObject
 {
-    public float movementSpeed;
+    public float repathTime;
+    public float repathAngle;
 
 }
