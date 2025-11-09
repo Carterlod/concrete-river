@@ -41,11 +41,6 @@ public class HeronController : MonoBehaviour
     [SerializeField] Coroutine callRoutine;
     private bool cooldownActive = false;
 
-    [Header("Other")]
-    [SerializeField] Transform camBodyTargetUp;
-    [SerializeField] Transform camBodyTargetDown;
-    [SerializeField] Transform camBodyTargetLeft;
-    [SerializeField] Transform camBodyTargetRight;
 
     [SerializeField]
     Mouth mouthController;
@@ -121,9 +116,7 @@ public class HeronController : MonoBehaviour
         // Head rotation
         Vector2 moveHeadValue = moveHeadAction.ReadValue<Vector2>();
         Vector3 newHeadDirection = root.forward;
-        newHeadDirection.y = root.eulerAngles.y + 90 * moveHeadValue.x;
-        newHeadDirection.x = 80 * -moveHeadValue.y;
-        head.eulerAngles = newHeadDirection;
+        head.localRotation = Quaternion.Euler(80 * -moveHeadValue.y,root.eulerAngles.y + 90 * moveHeadValue.x,0f);
 
         //Camera positioning
         Vector3 headOffset = cameraGoal.position - cameraGoal.right * config.cameraHeadingOffsetFromHead;
