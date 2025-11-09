@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d679ec88b7b7f04c810ad1087385c93, type: 3}
   m_Name: HeronConfig
   m_EditorClassIdentifier: Assembly-CSharp::HeronConfig
-  camBodyMovementSpeed: 5
+  camBodyMovementSpeed: 1
   bodyMovementSpeed: 0.5
-  bodyRotationSpeed: 0.2
+  bodyRotationSpeed: 0.1
   headMovementSpeed: 1
   headTravelDistanceMax: 1
   camFoVCurve:
@@ -23,12 +23,12 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.00554353
       value: 0.009791873
-      inSlope: 0
-      outSlope: 0
+      inSlope: -0.008883351
+      outSlope: -0.008883351
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.43211168
     - serializedVersion: 3
       time: 0.5
       value: 1.0082498
@@ -41,18 +41,19 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.9916687
       value: 2.0046387
-      inSlope: 0
-      outSlope: 0
+      inSlope: 0.10393607
+      outSlope: 0.10393607
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.6685568
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   fovSmoothTime: 5
   cameraHeadingOffsetFromHead: -0.43
-  FOVMinMax: {x: 5, y: 24.8}
+  FOVMinMax: {x: 20.47, y: 40.9}
   headSnapDistance: 3
   smoothedLookLambda: 5
   openJawAngle: 40
+  smoothedCamLookAtSpeed: 0

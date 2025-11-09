@@ -568,6 +568,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: Heron
       objectReference: {fileID: 0}
+    - target: {fileID: 5502930579558886720, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6565777
+      objectReference: {fileID: 0}
+    - target: {fileID: 5502930579558886720, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7466335
+      objectReference: {fileID: 0}
+    - target: {fileID: 5502930579558886720, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.08033426
+      objectReference: {fileID: 0}
+    - target: {fileID: 5502930579558886720, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.07064451
+      objectReference: {fileID: 0}
+    - target: {fileID: 5502930579558886720, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 104.281006
+      objectReference: {fileID: 0}
+    - target: {fileID: 5502930579558886720, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -58.789
+      objectReference: {fileID: 0}
+    - target: {fileID: 5502930579558886720, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -59.580017
+      objectReference: {fileID: 0}
+    - target: {fileID: 6541117679378353261, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
+      propertyPath: Bones.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6541117679378353261, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
+      propertyPath: Bones.Array.data[3].transform
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

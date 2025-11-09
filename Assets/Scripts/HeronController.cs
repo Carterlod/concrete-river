@@ -34,6 +34,7 @@ public class HeronController : MonoBehaviour
     private Vector3 initialCamPositionLocal;
     [SerializeField] Transform cameraGoal;
     private float smoothedFovRange = 0;
+    [SerializeField] Transform camLookAtBase;
 
     [Header("Animation")]
     [SerializeField] Coroutine callRoutine;
@@ -128,11 +129,13 @@ public class HeronController : MonoBehaviour
         // Head rotation
         Vector2 moveHeadValue = moveHeadAction.ReadValue<Vector2>();
         smoothedHeadInput = Damp(smoothedHeadInput, moveHeadValue, config.smoothedLookLambda, Time.deltaTime);
-        head.localRotation = Quaternion.Euler(80 * -smoothedHeadInput.y,90 * moveHeadValue.x,0f);
+        head.localRotation = Quaternion.Euler(55 * -smoothedHeadInput.y,120 * moveHeadValue.x,0f);
 
         //Camera positioning
         Vector3 headOffset = cameraGoal.position - cameraGoal.right * config.cameraHeadingOffsetFromHead;
-        cam.transform.LookAt(headOffset);
+        camLookAtBase.position = cam.transform.position;
+        camLookAtBase.LookAt(headOffset);
+        cam.transform.rotation = Quaternion.Lerp(cam.transform.rotation, camLookAtBase.rotation, Time.deltaTime * 5);
         Vector3 newCamPos = initialCamPositionLocal;
         newCamPos.x = initialCamPositionLocal.x + 5f * -moveHeadValue.x;
         newCamPos.y = initialCamPositionLocal.y + 5f * -moveHeadValue.y;
@@ -153,17 +156,32 @@ public class HeronController : MonoBehaviour
         //Head move
         headMovePose = headRestPos.position;
         //headMovePose.x += 0.5f * moveValue.x ;
-        headMovePose += head.right * 0.5f * moveValue.x;
+        headMovePose += root.right * 0.5f * moveValue.x;
         //headMovePose.y += 0.5f * moveValue.y;
-        headMovePose += head.up * 0.5f * moveValue.y;
+        if(moveValue.y > 0)
+        {
+            headMovePose += head.up * 0.5f * moveValue.y;
+
+        }
+        else
+        {
+            headMovePose += root.up * 0.5f * moveValue.y;
+
+        }
         //head.position = headMovePose;
 
         //Head snap
         float snapValue = shoulderButtonRightAction.ReadValue<float>();
-        
-        headMovePose += head.forward * config.headSnapDistance * snapValue;
-        //Vector3 snapTargetPos = headRestPos.localPosition + head.forward;
-        head.position = headMovePose;
+        Vector3 snapTargetPos = headRestPos.localPosition + head.forward;
+        if (snapValue > 0)
+        {
+            headMovePose += head.forward * config.headSnapDistance * snapValue;
+            head.position = headMovePose;
+        }
+        else
+        {
+            head.position = Vector3.Lerp(head.position, headMovePose, Time.deltaTime * 10);
+        }
         if(snapValue > 0 && snapValueLastFrame == 0)
         {
             //callRoutine = StartCoroutine(C_Call());
@@ -188,7 +206,7 @@ public class HeronController : MonoBehaviour
         {
             Debug.Log("Step conditions cleared");
             RaycastHit hit; 
-            if(Physics.Raycast(head.position, head.forward, out hit, 10, LayerMask.GetMask("Ground")))
+            if(Physics.Raycast(head.position, head.forward, out hit, 1000, LayerMask.GetMask("Ground")))
             {
                 Debug.Log("hit something");
                 
@@ -203,10 +221,11 @@ public class HeronController : MonoBehaviour
         stepping = true;
         Vector3 startPos = root.position;
         float distanceToGoal = Vector3.Distance(startPos, stepPos);
+        float d = 0.5f;
         float t = 0;
         bodyRotTarget.LookAt(stepPos);
         
-        while(distanceToGoal > 0.1f)
+        while(t < d)
         {
             t += Time.deltaTime;
             bodyRotTarget.position = root.position;

@@ -14,5 +14,6 @@ public class HeronConfig : ScriptableObject
     public float headSnapDistance;
     public float smoothedLookLambda;
     public float openJawAngle;
+    public float smoothedCamLookAtSpeed;
 
 }
