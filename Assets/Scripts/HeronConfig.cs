@@ -11,5 +11,8 @@ public class HeronConfig : ScriptableObject
     public float fovSmoothTime = 5;
     public  float cameraHeadingOffsetFromHead = -0.43f;
     public Vector2 FOVMinMax = new Vector2(5, 20);
+    public float headSnapDistance;
+    public float smoothedLookLambda;
+    public float openJawAngle;
 
 }

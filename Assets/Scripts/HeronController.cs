@@ -16,7 +16,6 @@ public class HeronController : MonoBehaviour
     [SerializeField] Transform head;
     [SerializeField] Transform headRestPos;
     [SerializeField] Vector3 headMovePose;
-    [SerializeField] Transform headSnapPos;
 
     [SerializeField]
     Transform heldFishPos;
@@ -25,7 +24,6 @@ public class HeronController : MonoBehaviour
     Transform heldFishFinalPos;
 
     private float snapValueLastFrame = 0;
-    private Vector3 initialHeadPos;
     [SerializeField] bool stepping = false;
     [SerializeField] Transform bodyRotTarget;
     private float stepValueLastFrame = 0;
@@ -37,9 +35,11 @@ public class HeronController : MonoBehaviour
     private float smoothedFovRange = 0;
 
     [Header("Animation")]
-    [SerializeField] Animator beakAnimator;
     [SerializeField] Coroutine callRoutine;
     private bool cooldownActive = false;
+
+    [Header("Audio")] [SerializeField] private AudioSource _as;
+    [SerializeField] private AudioClip stabClip;
 
 
     [SerializeField]
@@ -51,6 +51,12 @@ public class HeronController : MonoBehaviour
     [SerializeField] private HeronConfig config;
     bool hasFish = false;
 
+    [SerializeField]
+    Transform jawPivot;
+
+    
+    
+    
     public void GrabFish(FishController fishController)
     {
         if(hasFish){
@@ -61,10 +67,14 @@ public class HeronController : MonoBehaviour
 
     IEnumerator HandleGrabbedFish(FishController fishController)
     {
+        fishController.StopMoving();
         hasFish = true;
         fishController.transform.SetParent(heldFishPos);
         fishController.transform.localPosition = Vector3.zero;
-
+        fishController.transform.localRotation = Quaternion.identity;
+        float startingJawY = jawPivot.localRotation.x;
+        float currentJawX = config.openJawAngle;
+        jawPivot.localEulerAngles = new Vector3(currentJawX, jawPivot.localEulerAngles.y,jawPivot.localEulerAngles.z);
         float SnapValue()
         {
             return shoulderButtonRightAction.ReadValue<float>();
@@ -80,18 +90,19 @@ public class HeronController : MonoBehaviour
             while (SnapValue() <= 0.5f){
                 yield return null;
             }
-
-
-            fishController.transform.localRotation = Random.rotation;
             fishController.transform.localPosition = Vector3.Lerp(Vector3.zero, heldFishFinalPos.localPosition, (i + 1) / 3f);
         }
         
         Instantiate(eatParticleSystem, heldFishPos.position, Quaternion.identity);
         Destroy(fishController.gameObject);
+        jawPivot.localEulerAngles = new Vector3(startingJawY, jawPivot.localEulerAngles.y,jawPivot.localEulerAngles.z);
+
         hasFish = false;
     }
-    
-    
+
+
+
+    Vector2 smoothedHeadInput;
 
     private void Start()
     {
@@ -102,21 +113,15 @@ public class HeronController : MonoBehaviour
         shoulderButtonRightAction = inputActions.FindAction("Snap");
         shoulderButtonLeftAction = inputActions.FindAction("Step");
         initialCamPositionLocal = cam.transform.localPosition;
-        initialHeadPos = head.localPosition;
     }
     void Update()
     {
         //Body movement
         Vector2 moveValue = moveBodyAction.ReadValue<Vector2>();
-        /*
-        root.position += root.forward * moveValue.y * bodyMovementSpeed * Time.deltaTime;
-        root.Rotate(0, moveValue.x * bodyRotationSpeed, 0);
-        */
-
         // Head rotation
         Vector2 moveHeadValue = moveHeadAction.ReadValue<Vector2>();
-        Vector3 newHeadDirection = root.forward;
-        head.localRotation = Quaternion.Euler(80 * -moveHeadValue.y,root.eulerAngles.y + 90 * moveHeadValue.x,0f);
+        smoothedHeadInput = Damp(smoothedHeadInput, moveHeadValue, config.smoothedLookLambda, Time.deltaTime);
+        head.localRotation = Quaternion.Euler(80 * -smoothedHeadInput.y,90 * moveHeadValue.x,0f);
 
         //Camera positioning
         Vector3 headOffset = cameraGoal.position - cameraGoal.right * config.cameraHeadingOffsetFromHead;
@@ -128,7 +133,9 @@ public class HeronController : MonoBehaviour
         {
             newCamPos.y = 0;
         }
-        cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, newCamPos, Time.deltaTime * config.camBodyMovementSpeed);
+
+
+        cam.transform.localPosition = Damp(cam.transform.localPosition, newCamPos, config.camBodyMovementSpeed, Time.deltaTime);
 
         //Camera FoV
         float fovRange = Mathf.InverseLerp(-1, 1, moveHeadValue.y);
@@ -142,16 +149,18 @@ public class HeronController : MonoBehaviour
         headMovePose += head.right * 0.5f * moveValue.x;
         //headMovePose.y += 0.5f * moveValue.y;
         headMovePose += head.up * 0.5f * moveValue.y;
-        head.localPosition = headMovePose;
+        //head.position = headMovePose;
 
         //Head snap
         float snapValue = shoulderButtonRightAction.ReadValue<float>();
+        
+        headMovePose += head.forward * config.headSnapDistance * snapValue;
         //Vector3 snapTargetPos = headRestPos.localPosition + head.forward;
-        head.position = Vector3.Lerp(headMovePose, headSnapPos.position, snapValue);
+        head.position = headMovePose;
         if(snapValue > 0 && snapValueLastFrame == 0)
         {
             //callRoutine = StartCoroutine(C_Call());
-            beakAnimator.SetTrigger("call");
+            _as.PlayOneShot(stabClip);
         }
 
 
@@ -221,5 +230,22 @@ public class HeronController : MonoBehaviour
         cooldownActive = false;
     }
 
+    
+    public static float Damp(float a, float b, float lambda, float dt)
+    {
+        return Mathf.Lerp(a, b, 1 - Mathf.Exp(-lambda * dt));
+    }
+    public static Vector3 Damp(Vector3 a, Vector3 b, float lambda, float dt)
+    {
+        return Vector3.Lerp(a, b, 1 - Mathf.Exp(-lambda * dt));
+    }
+    public static Quaternion Damp(Quaternion a, Quaternion b, float lambda, float dt)
+    {
+        return Quaternion.Slerp(a, b, 1 - Mathf.Exp(-lambda * dt));
+    }
+    public static Vector2 Damp(Vector2 a, Vector2 b, float lambda, float dt)
+    {
+        return Vector2.Lerp(a, b, 1 - Mathf.Exp(-lambda * dt));
+    }
 
 }

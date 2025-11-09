@@ -17,8 +17,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: mountains
+    second: {fileID: 2100000, guid: 6ec3b0a3ff32b9948a09fe60b15f98a1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: riverbed
     second: {fileID: 2100000, guid: e069be615df76fa4296346f3e439d8d3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: skyline
+    second: {fileID: 2100000, guid: a723d944070e5bd41bf2c7e14d12b691, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
