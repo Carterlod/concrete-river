@@ -1,9 +1,24 @@
 fileFormatVersion: 2
-guid: 6914c595cf1db7a48bf1b6a0339ae33d
+guid: e6750c9ab29f95743a8f3be77c01e54f
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Base1_single
+    second: {fileID: 2100000, guid: 7d40d35970c373d4a989b648846ee4c0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grasslet1_double
+    second: {fileID: 2100000, guid: 7d40d35970c373d4a989b648846ee4c0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Moss1_double
+    second: {fileID: 2100000, guid: 7d40d35970c373d4a989b648846ee4c0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

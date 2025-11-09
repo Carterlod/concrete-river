@@ -21,8 +21,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 1
+      time: 0.00554353
+      value: 0.009791873
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 0.5
-      value: 1.2794595
+      value: 1.0082498
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -39,8 +39,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 2
+      time: 0.9916687
+      value: 2.0046387
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -52,7 +52,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   fovSmoothTime: 5
   cameraHeadingOffsetFromHead: -0.43
-  FOVMinMax: {x: 5, y: 15}
+  FOVMinMax: {x: 5, y: 24.8}
   headSnapDistance: 3
   smoothedLookLambda: 5
   openJawAngle: 40

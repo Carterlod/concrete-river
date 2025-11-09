@@ -8,22 +8,22 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Base1_single
-    second: {fileID: -876546973899608171, guid: c60c72eb5fa8d004a8312bbe04feedd4, type: 3}
+    second: {fileID: 2100000, guid: 7d40d35970c373d4a989b648846ee4c0, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Grasslet1_double
-    second: {fileID: -876546973899608171, guid: c60c72eb5fa8d004a8312bbe04feedd4, type: 3}
+    second: {fileID: 2100000, guid: 7d40d35970c373d4a989b648846ee4c0, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Moss1_double
-    second: {fileID: -876546973899608171, guid: c60c72eb5fa8d004a8312bbe04feedd4, type: 3}
+    second: {fileID: 2100000, guid: 7d40d35970c373d4a989b648846ee4c0, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Rocks1_single
-    second: {fileID: -876546973899608171, guid: c60c72eb5fa8d004a8312bbe04feedd4, type: 3}
+    second: {fileID: 2100000, guid: 7d40d35970c373d4a989b648846ee4c0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

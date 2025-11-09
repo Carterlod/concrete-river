@@ -1,9 +1,59 @@
 fileFormatVersion: 2
-guid: d5fab9bc46aecdc4c896929e1147d7c2
+guid: 2435712d23ef114499c8bb96b8d1b323
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Base1_single
+    second: {fileID: 2100000, guid: 7d40d35970c373d4a989b648846ee4c0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BushLeaves2_double
+    second: {fileID: 2100000, guid: 7d40d35970c373d4a989b648846ee4c0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BushLeaves2_single
+    second: {fileID: 2100000, guid: 7d40d35970c373d4a989b648846ee4c0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grasslet1_double
+    second: {fileID: 2100000, guid: 7d40d35970c373d4a989b648846ee4c0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Moss1_double
+    second: {fileID: 2100000, guid: 7d40d35970c373d4a989b648846ee4c0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rocks2_single
+    second: {fileID: 2100000, guid: 7d40d35970c373d4a989b648846ee4c0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SkinnyBushes_double
+    second: {fileID: 2100000, guid: 7d40d35970c373d4a989b648846ee4c0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SkinnyBushes_single
+    second: {fileID: 2100000, guid: 7d40d35970c373d4a989b648846ee4c0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TreeBase_single
+    second: {fileID: 2100000, guid: 7d40d35970c373d4a989b648846ee4c0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TreeLeaves1_double
+    second: {fileID: 2100000, guid: 7d40d35970c373d4a989b648846ee4c0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -33,7 +83,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 100
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1

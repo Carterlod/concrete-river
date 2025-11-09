@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 08be5a3b6daed444ba4432da57fe31f0
+guid: 5687da48076a7d34f946f75748f5f9b4
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SubRocks3_single
+    second: {fileID: 2100000, guid: 7d40d35970c373d4a989b648846ee4c0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -33,7 +38,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 100
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
