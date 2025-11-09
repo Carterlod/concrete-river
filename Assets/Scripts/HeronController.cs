@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 using static Unity.VisualScripting.Member;
 
 public class HeronController : MonoBehaviour
@@ -38,10 +39,14 @@ public class HeronController : MonoBehaviour
     [SerializeField] Coroutine callRoutine;
     private bool cooldownActive = false;
 
-    [Header("Audio")] [SerializeField] private AudioSource _as;
+    [FormerlySerializedAs("_as")] [Header("Audio")] [SerializeField] private AudioSource as_oneshots;
+    [SerializeField] private AudioSource as_looping;
     [SerializeField] private AudioClip stabClip;
-
-
+    [SerializeField] private AudioClip gulpClip;
+    [SerializeField] private AudioClip fishFlopClip;
+    
+    [Header("Other")]
+    
     [SerializeField]
     Mouth mouthController;
 
@@ -74,6 +79,7 @@ public class HeronController : MonoBehaviour
         fishController.transform.localRotation = Quaternion.identity;
         float startingJawY = jawPivot.localRotation.x;
         float currentJawX = config.openJawAngle;
+        as_looping.Play();
         jawPivot.localEulerAngles = new Vector3(currentJawX, jawPivot.localEulerAngles.y,jawPivot.localEulerAngles.z);
         float SnapValue()
         {
@@ -90,13 +96,14 @@ public class HeronController : MonoBehaviour
             while (SnapValue() <= 0.5f){
                 yield return null;
             }
+            as_oneshots.PlayOneShot(gulpClip);
             fishController.transform.localPosition = Vector3.Lerp(Vector3.zero, heldFishFinalPos.localPosition, (i + 1) / 3f);
         }
         
         Instantiate(eatParticleSystem, heldFishPos.position, Quaternion.identity);
         Destroy(fishController.gameObject);
         jawPivot.localEulerAngles = new Vector3(startingJawY, jawPivot.localEulerAngles.y,jawPivot.localEulerAngles.z);
-
+        as_looping.Stop();
         hasFish = false;
     }
 
@@ -160,7 +167,7 @@ public class HeronController : MonoBehaviour
         if(snapValue > 0 && snapValueLastFrame == 0)
         {
             //callRoutine = StartCoroutine(C_Call());
-            _as.PlayOneShot(stabClip);
+            as_oneshots.PlayOneShot(stabClip);
         }
 
 
