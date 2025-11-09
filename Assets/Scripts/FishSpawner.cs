@@ -26,6 +26,7 @@ public class FishSpawner : MonoBehaviour
     }
     void SpawnSingleFish()
     {
-        Instantiate(fishPrefab, transform.position, Quaternion.AngleAxis(Random.Range(0,360), Vector3.up));
+       var newFish = Instantiate(fishPrefab, transform.position, Quaternion.AngleAxis(Random.Range(0,360), Vector3.up));
+       newFish.transform.SetParent(transform);
     }
 }

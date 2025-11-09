@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 8030329936111716705}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.468}
-  m_LocalScale: {x: 0.15020333, y: 0.41074, z: 0.9181271}
+  m_LocalPosition: {x: -0.131, y: 0.073, z: -0.649}
+  m_LocalScale: {x: 0.69131273, y: 0.70117426, z: 1.5673349}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8888516892212430060}
@@ -179,7 +179,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: -0.25
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!1001 &6582146102602461443

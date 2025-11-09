@@ -30,6 +30,12 @@ public class FishController : MonoBehaviour
 
         // transform.position += transform.forward * config.movementSpeed * Time.deltaTime;
     }
+
+    IEnumerator KillAfterDuration()
+    {
+        yield return new WaitForSeconds(config.lifetime);
+        Destroy(this.gameObject);
+    }
     public void StopMoving()
     {
         isMoving = false;
