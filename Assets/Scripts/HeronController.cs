@@ -64,6 +64,7 @@ public class HeronController : MonoBehaviour
 
     IEnumerator HandleGrabbedFish(FishController fishController)
     {
+        fishController.StopMoving();
         hasFish = true;
         fishController.transform.SetParent(heldFishPos);
         fishController.transform.localPosition = Vector3.zero;

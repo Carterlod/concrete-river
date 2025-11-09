@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd3cae7d5cd4450cb9953b8748133182, type: 3}
   m_Name: FishConfig
   m_EditorClassIdentifier: Assembly-CSharp::FishConfig
+  movementSpeed: 2
