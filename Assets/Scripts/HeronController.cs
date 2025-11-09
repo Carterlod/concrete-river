@@ -38,6 +38,9 @@ public class HeronController : MonoBehaviour
     [SerializeField] Coroutine callRoutine;
     private bool cooldownActive = false;
 
+    [Header("Audio")] [SerializeField] private AudioSource _as;
+    [SerializeField] private AudioClip stabClip;
+
 
     [SerializeField]
     Mouth mouthController;
@@ -157,6 +160,7 @@ public class HeronController : MonoBehaviour
         if(snapValue > 0 && snapValueLastFrame == 0)
         {
             //callRoutine = StartCoroutine(C_Call());
+            _as.PlayOneShot(stabClip);
         }
 
 
