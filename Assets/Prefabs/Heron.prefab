@@ -396,7 +396,6 @@ MonoBehaviour:
   bodyRotTarget: {fileID: 9002195671799149626}
   cam: {fileID: 4340407994939156659}
   cameraGoal: {fileID: 8959807299826805966}
-  beakAnimator: {fileID: 0}
   mouthController: {fileID: 4121214094444000607}
   eatParticleSystem: {fileID: 7685341854298056322, guid: 563d4654371257e46ae2a36a5275ffb8, type: 3}
   config: {fileID: 11400000, guid: ee25dc64a5c29ec41b2ffe1983db4fa1, type: 2}
@@ -5586,7 +5585,7 @@ Transform:
   m_GameObject: {fileID: 8496137209953399913}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: -0.378}
+  m_LocalPosition: {x: 0, y: 0, z: 0.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5616,14 +5615,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8897143225528599065}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.11533799, y: 0.21778007, z: 0.12884393, w: -0.96055627}
+  m_LocalRotation: {x: 0.12884341, y: 0.9605566, z: 0.115337566, w: 0.21777909}
   m_LocalPosition: {x: -0.00131, y: -0.00057, z: 0.00404}
   m_LocalScale: {x: 0.010000004, y: 0.009999996, z: 0.009999996}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8381952946108611807}
   m_Father: {fileID: 2896426177505862575}
-  m_LocalEulerAnglesHint: {x: 6.853, y: -22.007, z: -16.24}
+  m_LocalEulerAnglesHint: {x: -9.524, y: -207.024, z: 17.573}
 --- !u!1001 &114402242133012992
 PrefabInstance:
   m_ObjectHideFlags: 0
