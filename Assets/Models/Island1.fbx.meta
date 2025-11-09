@@ -3,7 +3,27 @@ guid: 5777cdb79e463b742945524b822ee012
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Base1_single
+    second: {fileID: -876546973899608171, guid: c60c72eb5fa8d004a8312bbe04feedd4, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grasslet1_double
+    second: {fileID: -876546973899608171, guid: c60c72eb5fa8d004a8312bbe04feedd4, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Moss1_double
+    second: {fileID: -876546973899608171, guid: c60c72eb5fa8d004a8312bbe04feedd4, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rocks1_single
+    second: {fileID: -876546973899608171, guid: c60c72eb5fa8d004a8312bbe04feedd4, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -33,7 +53,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 10
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -91,7 +111,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 10
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
