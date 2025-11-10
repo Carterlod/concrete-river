@@ -282,6 +282,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b0684becde0a52148b7f5023ccd0fa6f, type: 3}
   - {fileID: 8300000, guid: 946c85bdc970da74a82a8d3b3f43dcf6, type: 3}
   skewerClip: {fileID: 8300000, guid: 83cc98cbe2313164f9121c1e59ce115b, type: 3}
+  noiseCollider: {fileID: 7538532678804680018}
   isSnapping: 0
 --- !u!54 &8819066658130262460
 Rigidbody:
@@ -616,6 +617,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1746935789368817471}
   - component: {fileID: 2790776824175158275}
+  - component: {fileID: 6667339789616500377}
+  - component: {fileID: 5880824971329906470}
   m_Layer: 0
   m_Name: Heron
   m_TagString: Untagged
@@ -656,6 +659,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HeronController
   root: {fileID: 3834415373298153366}
+  characterController: {fileID: 6667339789616500377}
   head: {fileID: 3815673785076693614}
   headRestPos: {fileID: 8765067824519166992}
   headMovePose: {x: 0, y: 0, z: 0}
@@ -675,6 +679,54 @@ MonoBehaviour:
   eatParticleSystem: {fileID: 7685341854298056322, guid: 563d4654371257e46ae2a36a5275ffb8, type: 3}
   config: {fileID: 11400000, guid: ee25dc64a5c29ec41b2ffe1983db4fa1, type: 2}
   jawPivot: {fileID: 1704434624246640279}
+--- !u!143 &6667339789616500377
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3997634472256526030}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!136 &5880824971329906470
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3997634472256526030}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4094119888691363460
 GameObject:
   m_ObjectHideFlags: 0
@@ -5867,6 +5919,87 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &6079603567728398084
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4081003950054191221}
+  - component: {fileID: 7538532678804680018}
+  - component: {fileID: 2326171253567950387}
+  m_Layer: 0
+  m_Name: NoiseSphere
+  m_TagString: sound
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4081003950054191221
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6079603567728398084}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.0009371008}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6596666868650501074}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &7538532678804680018
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6079603567728398084}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &2326171253567950387
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6079603567728398084}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.2
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &6141139611421143321
 GameObject:
   m_ObjectHideFlags: 0
@@ -6114,6 +6247,34 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 9215cfa7f25872449816dcb1f7e52f83, type: 2}
+    - target: {fileID: -3618600452680753344, guid: b3de5d27403910c42bc3e9a5c171e533, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6565777
+      objectReference: {fileID: 0}
+    - target: {fileID: -3618600452680753344, guid: b3de5d27403910c42bc3e9a5c171e533, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7466335
+      objectReference: {fileID: 0}
+    - target: {fileID: -3618600452680753344, guid: b3de5d27403910c42bc3e9a5c171e533, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.08033426
+      objectReference: {fileID: 0}
+    - target: {fileID: -3618600452680753344, guid: b3de5d27403910c42bc3e9a5c171e533, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.07064451
+      objectReference: {fileID: 0}
+    - target: {fileID: -3618600452680753344, guid: b3de5d27403910c42bc3e9a5c171e533, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 104.281006
+      objectReference: {fileID: 0}
+    - target: {fileID: -3618600452680753344, guid: b3de5d27403910c42bc3e9a5c171e533, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -58.789
+      objectReference: {fileID: 0}
+    - target: {fileID: -3618600452680753344, guid: b3de5d27403910c42bc3e9a5c171e533, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -59.580017
+      objectReference: {fileID: 0}
     - target: {fileID: -3053564878850018308, guid: b3de5d27403910c42bc3e9a5c171e533, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -6148,6 +6309,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -3337487765870364908, guid: b3de5d27403910c42bc3e9a5c171e533, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8765067824519166992}
+    - targetCorrespondingSourceObject: {fileID: -2730762835564375598, guid: b3de5d27403910c42bc3e9a5c171e533, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4081003950054191221}
     - targetCorrespondingSourceObject: {fileID: 3000624924881162671, guid: b3de5d27403910c42bc3e9a5c171e533, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5494683523564417503}
@@ -6481,32 +6645,6 @@ MonoBehaviour:
     - 1.476754
     - 0.81393445
     randomInts: 010000000000000002000000000000000100000001000000
-  - transform: {fileID: 0}
-    Evaluation: 1
-    initLocalPos: {x: 0.00091573043, y: 0.00044188352, z: 0.0018817506}
-    initLocalRot: {x: 0.0000001461624, y: -0.00000008674996, z: -0.00000032782532, w: 1}
-    initLocalScale: {x: 0.010000003, y: 0.00999999, z: 0.00999999}
-    srcAnimatorLocPosition: {x: 0, y: 0, z: 0}
-    srcAnimatorPosition: {x: 61.297997, y: 2.2883465, z: 15.296066}
-    srcAnimatorLocRotation: {x: 0.0000001461624, y: -0.00000008674996, z: -0.00000032782532, w: 1}
-    srcAnimatorRotation: {x: 0.24978021, y: 0.78129196, z: -0.54724556, w: -0.16648111}
-    EnableCollisions: 1
-    CollisionRadius: 0.1
-    CollisionHelperVector: {x: 0, y: 0, z: 0}
-    lastFinalLocPosition: {x: 0.00091573043, y: 0.00044188352, z: 0.0018817506}
-    lastFinalLocRotation: {x: 0.0000001461624, y: -0.00000008674996, z: -0.00000032782532, w: 1}
-    MomentDampen: 0
-    PosMul: 1
-    RotMul: 1
-    ScaleMul: 1
-    randomFloats:
-    - 0.9754654
-    - 1.4024055
-    - 1.3315845
-    - 1.2155653
-    - 0.7553386
-    - 1.6796119
-    randomInts: 020000000000000000000000020000000200000001000000
   CompensationTransform: {fileID: 0}
   AnimatePhysics: 0
   UnscaledDelta: 0

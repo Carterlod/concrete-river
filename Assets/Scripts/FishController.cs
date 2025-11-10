@@ -19,16 +19,39 @@ public class FishController : MonoBehaviour
 
     IEnumerator Update()
     {
-
         while (true){
             float offsetAngle = Random.Range(-config.repathAngle, config.repathAngle);
             thisAgent.SetDestination(transform.position + Quaternion.AngleAxis(offsetAngle,Vector3.up)* transform.forward * 10f);
             yield return new WaitForSeconds(config.repathTime);
         }
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "sound")
+        {
+            Debug.Log("I'm scared");
+            ScareMe(other.gameObject.transform);
+        }
+    }
 
+    public void ScareMe(Transform loudNoiseSource)
+    {
+        StopAllCoroutines();
+        StartCoroutine(Run(loudNoiseSource)); 
+    }
 
-        // transform.position += transform.forward * config.movementSpeed * Time.deltaTime;
+    IEnumerator Run(Transform runFrom)
+    {
+        while (true)
+        {
+            Vector3 runDirection = transform.position - runFrom.position;
+            runDirection.Normalize();
+            thisAgent.SetDestination(transform.position + runDirection * 10f);
+            yield return new WaitForSeconds(config.repathTime);
+            StartCoroutine(Update());
+            yield return null;
+        }
     }
 
     IEnumerator KillAfterDuration()

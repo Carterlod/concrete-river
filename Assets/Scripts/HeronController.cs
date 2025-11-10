@@ -14,6 +14,7 @@ public class HeronController : MonoBehaviour
     InputAction shoulderButtonRightAction;
     InputAction shoulderButtonLeftAction;
     [SerializeField] Transform root;
+    [SerializeField] CharacterController characterController;
     [SerializeField] Transform head;
     [SerializeField] Transform headRestPos;
     [SerializeField] Vector3 headMovePose;
@@ -204,7 +205,11 @@ public class HeronController : MonoBehaviour
         float stepValue = shoulderButtonLeftAction.ReadValue<float>();
         if (stepValue == 1 && stepValueLastFrame < 1 && !stepping)
         {
-            Debug.Log("Step conditions cleared");
+            //Vector3 movementVector = root.forward + head.forward;
+            characterController.Move(root.forward * stepValue * Time.deltaTime * config.bodyMovementSpeed);
+            characterController.gameObject.transform.Rotate(Vector3.up, config.bodyRotationSpeed * Time.deltaTime * smoothedHeadInput.x);
+            /*
+            //Debug.Log("Step conditions cleared");
             RaycastHit hit; 
             if(Physics.Raycast(head.position, head.forward, out hit, 1000, LayerMask.GetMask("Ground")))
             {
@@ -212,6 +217,7 @@ public class HeronController : MonoBehaviour
                 
                 StartCoroutine(C_Move(hit.point));
             }
+            */
         }
         
     }
