@@ -219,6 +219,7 @@ public class HeronController : MonoBehaviour
             }
             */
         }
+        characterController.Move(Vector3.down * 9.81f);
         
     }
 
