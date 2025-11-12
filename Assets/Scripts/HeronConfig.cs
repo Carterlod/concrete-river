@@ -15,5 +15,7 @@ public class HeronConfig : ScriptableObject
     public float smoothedLookLambda;
     public float openJawAngle;
     public float smoothedCamLookAtSpeed;
+    public float stepDistanceMultiplier;
+    public AnimationCurve smoothedStepRotation;
 
 }

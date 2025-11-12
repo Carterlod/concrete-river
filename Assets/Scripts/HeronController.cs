@@ -9,8 +9,8 @@ public class HeronController : MonoBehaviour
 {
 
     [Header("Body & Movement")]
-    InputAction moveBodyAction;
-    InputAction moveHeadAction;
+    InputAction moveAction1;
+    InputAction moveAction2;
     InputAction shoulderButtonRightAction;
     InputAction shoulderButtonLeftAction;
     [SerializeField] Transform root;
@@ -18,7 +18,11 @@ public class HeronController : MonoBehaviour
     [SerializeField] Transform head;
     [SerializeField] Transform headRestPos;
     [SerializeField] Vector3 headMovePose;
-
+    [SerializeField] Transform stepPositionOrigin;
+    [SerializeField] Transform stepPositionDestination;
+    [SerializeField] Transform stepPositionProgress;
+    [SerializeField] Transform stepEndRotation;
+ 
     [SerializeField]
     Transform heldFishPos;
 
@@ -29,6 +33,8 @@ public class HeronController : MonoBehaviour
     [SerializeField] bool stepping = false;
     [SerializeField] Transform bodyRotTarget;
     private float stepValueLastFrame = 0;
+    [SerializeField] float stepValue = 0f;
+    [SerializeField] bool stepCommitted = false;
 
     [Header("Camera")]
     [SerializeField] Camera cam;
@@ -36,8 +42,10 @@ public class HeronController : MonoBehaviour
     [SerializeField] Transform cameraGoal;
     private float smoothedFovRange = 0;
     [SerializeField] Transform camLookAtBase;
+    [SerializeField] Transform camBodyTarget;
 
     [Header("Animation")]
+    [SerializeField] Animator animator;
     [SerializeField] Coroutine callRoutine;
     private bool cooldownActive = false;
 
@@ -46,7 +54,10 @@ public class HeronController : MonoBehaviour
     [SerializeField] private AudioClip stabClip;
     [SerializeField] private AudioClip gulpClip;
     [SerializeField] private AudioClip fishFlopClip;
-    
+
+    [Header("Particles")]
+    [SerializeField] ParticleSystem rippleFX;
+
     [Header("Other")]
     
     [SerializeField]
@@ -117,24 +128,32 @@ public class HeronController : MonoBehaviour
     {
         var inputActions = InputSystem.actions;
         inputActions.Enable();
-        moveBodyAction = inputActions.FindAction("Move");
-        moveHeadAction = inputActions.FindAction("Look");
+        moveAction1 = inputActions.FindAction("Move");
+        moveAction2 = inputActions.FindAction("Look");
         shoulderButtonRightAction = inputActions.FindAction("Snap");
         shoulderButtonLeftAction = inputActions.FindAction("Step");
-        initialCamPositionLocal = cam.transform.localPosition;
+        initialCamPositionLocal = camBodyTarget.transform.localPosition;
+        smoothedStepProgress = characterController.transform.position;
     }
+    [SerializeField] Vector3 smoothedStepProgress;
+    [SerializeField] Vector3 destinationProgress;
+    Quaternion stepStartRotation;
+    float smoothedRotationAmount;
     void Update()
     {
         //Body movement
-        Vector2 moveValue = moveBodyAction.ReadValue<Vector2>();
+        Vector2 moveValue = moveAction1.ReadValue<Vector2>();
         // Head rotation
-        Vector2 moveHeadValue = moveHeadAction.ReadValue<Vector2>();
+        Vector2 moveHeadValue = moveAction2.ReadValue<Vector2>();
         smoothedHeadInput = Damp(smoothedHeadInput, moveHeadValue, config.smoothedLookLambda, Time.deltaTime);
-        head.localRotation = Quaternion.Euler(55 * -smoothedHeadInput.y,120 * moveHeadValue.x,0f);
+        head.localRotation = Quaternion.Euler(55 * -smoothedHeadInput.y, 50 * moveHeadValue.x, 0f);
 
         //Camera positioning
         Vector3 headOffset = cameraGoal.position - cameraGoal.right * config.cameraHeadingOffsetFromHead;
-        camLookAtBase.position = cam.transform.position;
+        Vector3 headMoveDelta = headMovePose - headRestPos.position;
+        headOffset += headMoveDelta;
+
+        camLookAtBase.localPosition = camBodyTarget.transform.localPosition;
         camLookAtBase.LookAt(headOffset);
         cam.transform.rotation = Quaternion.Lerp(cam.transform.rotation, camLookAtBase.rotation, Time.deltaTime * 5);
         Vector3 newCamPos = initialCamPositionLocal;
@@ -146,7 +165,8 @@ public class HeronController : MonoBehaviour
         }
 
 
-        cam.transform.localPosition = Damp(cam.transform.localPosition, newCamPos, config.camBodyMovementSpeed, Time.deltaTime);
+        camBodyTarget.localPosition = newCamPos;
+        cam.transform.position = Damp(cam.transform.position, camBodyTarget.position, config.camBodyMovementSpeed, Time.deltaTime);
 
         //Camera FoV
         float fovRange = Mathf.InverseLerp(-1, 1, moveHeadValue.y);
@@ -156,9 +176,8 @@ public class HeronController : MonoBehaviour
 
         //Head move
         headMovePose = headRestPos.position;
-        //headMovePose.x += 0.5f * moveValue.x ;
         headMovePose += root.right * 0.5f * moveValue.x;
-        //headMovePose.y += 0.5f * moveValue.y;
+
         if(moveValue.y > 0)
         {
             headMovePose += head.up * 0.5f * moveValue.y;
@@ -202,24 +221,95 @@ public class HeronController : MonoBehaviour
         
 
         //Stepping
-        float stepValue = shoulderButtonLeftAction.ReadValue<float>();
+        stepValue = shoulderButtonLeftAction.ReadValue<float>();
+        if(shoulderButtonLeftAction.activeControl == null)
+        {
+            stepValue = 0f;
+        }
+        
+        characterController.transform.position = smoothedStepProgress;
+
+        if (stepValue > 0)
+        {
+            animator.SetBool("walking", true);
+            Vector3 movementVector = head.forward;
+            RaycastHit hit = new RaycastHit();
+           
+            stepPositionProgress.position = smoothedStepProgress;
+            if(stepValueLastFrame == 0)
+            {
+                stepPositionOrigin.position = characterController.transform.position;
+                stepPositionOrigin.forward = characterController.transform.forward;
+                stepStartRotation = stepPositionOrigin.rotation;
+                //stepPositionOrigin.Rotate(Vector3.up, config.bodyRotationSpeed * Time.deltaTime * smoothedHeadInput.x);
+                if (Physics.Raycast(stepPositionOrigin.position + movementVector.normalized * 2f + Vector3.up * 2f, Vector3.down, out hit, 100, LayerMask.GetMask("Ground")))
+                {
+                    stepPositionDestination.position = hit.point; 
+                }
+                stepEndRotation.position = characterController.transform.position;
+                stepEndRotation.LookAt(hit.point, Vector3.up);
+                PlayRippleParticle(characterController.transform.position);
+            }
+            if (stepValue == 1 && stepCommitted == false)
+            {
+                stepCommitted = true;
+                PlayRippleParticle(hit.point);
+
+            }
+            smoothedStepProgress = Vector3.Lerp(smoothedStepProgress, destinationProgress, Time.deltaTime * 4f);
+            if (!stepCommitted)
+            {
+                if (stepValue < 1)
+                {
+                    smoothedRotationAmount = Mathf.Lerp(smoothedRotationAmount, stepValue, Time.deltaTime * 2f);
+                    characterController.transform.localRotation = Quaternion.Lerp(stepStartRotation, stepEndRotation.rotation, config.smoothedStepRotation.Evaluate(stepValue));
+                    destinationProgress = Vector3.Slerp(stepPositionOrigin.position, stepPositionDestination.position, stepValue);
+
+
+                    //characterController.Move(characterController.transform.forward* config.stepDistanceMultiplier * stepValue * Time.deltaTime);
+                }
+                /*
+                else if(stepValue < stepValueLastFrame && stepValue < 1)
+                {
+                    characterController.Move(-characterController.transform.forward * config.stepDistanceMultiplier * stepValue * Time.deltaTime);
+                }
+                */
+
+
+            }
+            else if (stepCommitted)
+            {
+                if(stepValue > stepValueLastFrame)
+                {
+
+                }
+                if(stepValue < stepValueLastFrame)
+                {
+
+                }
+            }
+            //characterController.gameObject.transform.Rotate(Vector3.up, config.bodyRotationSpeed * Time.deltaTime * smoothedHeadInput.x);
+        }
+        else if(stepValue == 0 && stepCommitted)
+        {
+            stepCommitted = false;
+            animator.SetBool("walking", false);
+
+        }
+        else
+        {
+            characterController.Move(Vector3.down * 9.81f);
+        }
+            stepValueLastFrame = stepValue;
+        /*
         if (stepValue == 1 && stepValueLastFrame < 1 && !stepping)
         {
             //Vector3 movementVector = root.forward + head.forward;
             characterController.Move(root.forward * stepValue * Time.deltaTime * config.bodyMovementSpeed);
             characterController.gameObject.transform.Rotate(Vector3.up, config.bodyRotationSpeed * Time.deltaTime * smoothedHeadInput.x);
-            /*
-            //Debug.Log("Step conditions cleared");
-            RaycastHit hit; 
-            if(Physics.Raycast(head.position, head.forward, out hit, 1000, LayerMask.GetMask("Ground")))
-            {
-                Debug.Log("hit something");
-                
-                StartCoroutine(C_Move(hit.point));
-            }
-            */
         }
-        characterController.Move(Vector3.down * 9.81f);
+        */
+        
         
     }
 
@@ -263,6 +353,11 @@ public class HeronController : MonoBehaviour
         cooldownActive = false;
     }
 
+    private void PlayRippleParticle(Vector3 pos)
+    {
+        //rippleFX.transform.position = pos;
+        rippleFX.Play();
+    }
     
     public static float Damp(float a, float b, float lambda, float dt)
     {
