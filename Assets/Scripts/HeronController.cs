@@ -144,8 +144,8 @@ public class HeronController : MonoBehaviour
             if (moveValue.x > 0 || moveValue.y > 0) 
             { 
                 animator.SetBool("walking", true); 
+                animator.speed = moveValue.y;
             }
-
         }
         else if (leftTriggerValue > 0)
         {
@@ -169,11 +169,13 @@ public class HeronController : MonoBehaviour
         smoothedHeadInput = Damp(smoothedHeadInput, moveHeadValue, config.smoothedLookLambda, Time.deltaTime);
         head.localRotation = Quaternion.Euler(55 * -smoothedHeadInput.y + 10 * leftTriggerValue, 120 * moveHeadValue.x, 0f); 
 
-        //Camera positioning
+        //Camera rotation
         Vector3 headOffset = cameraGoal.position - cameraGoal.right * config.cameraHeadingOffsetFromHead;
         camLookAtBase.position = cam.transform.position;
         camLookAtBase.LookAt(headOffset);
         cam.transform.rotation = Quaternion.Lerp(cam.transform.rotation, camLookAtBase.rotation, Time.deltaTime * 5);
+
+        //Camera position
         Vector3 newCamPos = initialCamPositionLocal;
         newCamPos.x = initialCamPositionLocal.x + 5f * -moveHeadValue.x;
         newCamPos.y = initialCamPositionLocal.y + 5f * -moveHeadValue.y;
@@ -182,13 +184,21 @@ public class HeronController : MonoBehaviour
             newCamPos.y = 0;
         }
 
+        //CameraZoom
+        if(leftTriggerValue > 0)
+        {
+            newCamPos += cam.transform.forward * 1.5f;
+        }
+
         cam.transform.localPosition = Damp(cam.transform.localPosition, newCamPos, config.camBodyMovementSpeed, Time.deltaTime);
 
         //Camera FoV
         float fovRange = Mathf.InverseLerp(-1, 1, moveHeadValue.y);
         fovRange = config.camFoVCurve.Evaluate(fovRange);
         smoothedFovRange = Mathf.Lerp(smoothedFovRange, fovRange, Time.deltaTime * config.fovSmoothTime);
+
         cam.fieldOfView = Mathf.LerpUnclamped(config.FOVMinMax.x, config.FOVMinMax.y, smoothedFovRange);
+        
 
 
         //Peck

@@ -5403,6 +5403,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 666097476}
   m_LocalEulerAnglesHint: {x: 0, y: 7.544, z: 0}
+--- !u!95 &236098679 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6761486786176141925, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
+  m_PrefabInstance: {fileID: 413673113}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &255255437
 GameObject:
   m_ObjectHideFlags: 0
@@ -5839,6 +5844,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 509181286766397623, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.4621105
+      objectReference: {fileID: 0}
     - target: {fileID: 1746935789368817471, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
       propertyPath: m_LocalPosition.x
       value: 48.98
@@ -5879,6 +5888,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2790776824175158275, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 236098679}
     - target: {fileID: 2790776824175158275, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
       propertyPath: crouchHeadRestPos
       value: 
