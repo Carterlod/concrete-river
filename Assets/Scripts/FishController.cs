@@ -30,7 +30,6 @@ public class FishController : MonoBehaviour
     {
         if (other.gameObject.tag == "sound")
         {
-            Debug.Log("I'm scared");
             ScareMe(other.gameObject.transform);
         }
     }

@@ -47,7 +47,6 @@ public class Mouth : MonoBehaviour
 
     IEnumerator C_PingNoise()
     {
-        Debug.Log("pinging noise");
         noiseCollider.gameObject.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         noiseCollider.gameObject.SetActive(false);

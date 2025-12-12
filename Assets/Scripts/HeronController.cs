@@ -25,6 +25,7 @@ public class HeronController : MonoBehaviour
     [SerializeField] Transform headRestPos;
     [SerializeField] Transform crouchHeadRestPos;
     [SerializeField] Vector3 headMovePose;
+    public Vector2 moveValue = Vector2.zero;
 
     [SerializeField]
     Transform heldFishPos;
@@ -69,6 +70,9 @@ public class HeronController : MonoBehaviour
     [SerializeField]
     Transform jawPivot;
 
+    [SerializeField]
+    private HeronImageSpawner PS_herons;
+
 
     public void GrabFish(FishController fishController)
     {
@@ -111,10 +115,11 @@ public class HeronController : MonoBehaviour
             fishController.transform.localPosition = Vector3.Lerp(Vector3.zero, heldFishFinalPos.localPosition, (i + 1) / 3f);
         }
 
-        Instantiate(eatParticleSystem, heldFishPos.position, Quaternion.identity);
+        //Instantiate(eatParticleSystem, heldFishPos.position, Quaternion.identity);
         Destroy(fishController.gameObject);
         jawPivot.localEulerAngles = new Vector3(startingJawY, jawPivot.localEulerAngles.y, jawPivot.localEulerAngles.z);
         as_looping.Stop();
+        PS_herons.spawnArt();
         hasFish = false;
     }
 
@@ -134,7 +139,7 @@ public class HeronController : MonoBehaviour
     {
         //Body movement
         float leftTriggerValue = shoulderButtonLeftAction.ReadValue<float>();
-        Vector2 moveValue = moveBodyAction.ReadValue<Vector2>();
+        moveValue = moveBodyAction.ReadValue<Vector2>();
         animator.SetBool("walking", false);
         if (leftTriggerValue == 0)
         {
@@ -154,15 +159,13 @@ public class HeronController : MonoBehaviour
             headMovePose += root.right * 0.5f * moveValue.x;
             if (moveValue.y > 0)
             {
-                headMovePose += head.up * 0.5f * moveValue.y;
+                headMovePose += head.up * 0.5f * moveValue.y; 
             }
             else
             {
                 headMovePose += root.up * 0.5f * moveValue.y;
             }
         }
-
-
 
         // Head rotation
         Vector2 moveHeadValue = moveHeadAction.ReadValue<Vector2>();
