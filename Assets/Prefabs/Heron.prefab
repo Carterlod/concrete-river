@@ -619,7 +619,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b0684becde0a52148b7f5023ccd0fa6f, type: 3}
   - {fileID: 8300000, guid: 946c85bdc970da74a82a8d3b3f43dcf6, type: 3}
   skewerClip: {fileID: 8300000, guid: 83cc98cbe2313164f9121c1e59ce115b, type: 3}
-  noiseCollider: {fileID: 7538532678804680018}
+  noiseCollider: {fileID: 8336000420691222605}
   isSnapping: 0
 --- !u!114 &6438001883409590082
 MonoBehaviour:
@@ -639,6 +639,7 @@ MonoBehaviour:
   lifetimeRange: {x: 1, y: 10}
   footstepAudio: {fileID: 0}
   foot: 0
+  noiseMaker: {fileID: 0}
 --- !u!54 &8819066658130262460
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5877,7 +5878,7 @@ Transform:
   m_GameObject: {fileID: 3690301790235790494}
   serializedVersion: 2
   m_LocalRotation: {x: 0.32405853, y: 0.03159178, z: -0.08301624, w: 0.94185793}
-  m_LocalPosition: {x: 0.0002, y: 0.00296, z: 0.01425}
+  m_LocalPosition: {x: 0.00063, y: 0.00549, z: 0.01497}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5923,6 +5924,7 @@ Transform:
   - {fileID: 8381041397203283388}
   - {fileID: 999360859781130972}
   - {fileID: 8714489145941129194}
+  - {fileID: 4081003950054191221}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2790776824175158275
@@ -11011,7 +11013,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 55c6cb8950ff2ff469a5149b6158b6cc, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -11107,6 +11109,7 @@ GameObject:
   - component: {fileID: 4081003950054191221}
   - component: {fileID: 7538532678804680018}
   - component: {fileID: 2326171253567950387}
+  - component: {fileID: 8336000420691222605}
   m_Layer: 0
   m_Name: NoiseSphere
   m_TagString: sound
@@ -11122,12 +11125,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6079603567728398084}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.0009371008}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.000000059604623, y: -0.000000014901156, z: 0.0764294, w: -0.99707496}
+  m_LocalPosition: {x: 0, y: 3.0513358, z: 0.22373295}
+  m_LocalScale: {x: 99.99998, y: 100.00005, z: 100.00006}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6596666868650501074}
+  m_Father: {fileID: 1746935789368817471}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &7538532678804680018
 SphereCollider:
@@ -11177,6 +11180,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8336000420691222605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6079603567728398084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9807b3b78b34824d88b273e7bd08cb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  noiseCollider: {fileID: 7538532678804680018}
 --- !u!1 &6141139611421143321
 GameObject:
   m_ObjectHideFlags: 0
@@ -16414,9 +16430,6 @@ PrefabInstance:
       addedObject: {fileID: 5270442257514963972}
     - targetCorrespondingSourceObject: {fileID: -2730762835564375598, guid: b3de5d27403910c42bc3e9a5c171e533, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4081003950054191221}
-    - targetCorrespondingSourceObject: {fileID: -2730762835564375598, guid: b3de5d27403910c42bc3e9a5c171e533, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 2243786234585305856}
     - targetCorrespondingSourceObject: {fileID: 3000624924881162671, guid: b3de5d27403910c42bc3e9a5c171e533, type: 3}
       insertIndex: -1
@@ -17187,6 +17200,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 883324723972988919}
     - target: {fileID: 202293471365268427, guid: 331acd0425efa5e4a8c1772a5c5ed919, type: 3}
+      propertyPath: noiseMaker
+      value: 
+      objectReference: {fileID: 8336000420691222605}
+    - target: {fileID: 202293471365268427, guid: 331acd0425efa5e4a8c1772a5c5ed919, type: 3}
       propertyPath: footstepAudio
       value: 
       objectReference: {fileID: 8060315870279041465}
@@ -17276,6 +17293,10 @@ PrefabInstance:
       propertyPath: ps_ripple
       value: 
       objectReference: {fileID: 883324723972988919}
+    - target: {fileID: 202293471365268427, guid: 331acd0425efa5e4a8c1772a5c5ed919, type: 3}
+      propertyPath: noiseMaker
+      value: 
+      objectReference: {fileID: 8336000420691222605}
     - target: {fileID: 202293471365268427, guid: 331acd0425efa5e4a8c1772a5c5ed919, type: 3}
       propertyPath: footstepAudio
       value: 

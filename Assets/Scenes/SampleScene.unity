@@ -786,8 +786,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4283623679
-  m_fontColor: {r: 1, g: 0.90843034, b: 0.3226415, a: 1}
+    rgba: 4281518335
+  m_fontColor: {r: 1, g: 0.7843596, b: 0.19433957, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1124,10 +1124,6 @@ PrefabInstance:
     - target: {fileID: 3997634472256526030, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
       propertyPath: m_Name
       value: Heron
-      objectReference: {fileID: 0}
-    - target: {fileID: 6125844388649269965, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
-      propertyPath: m_PlayOnAwake
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

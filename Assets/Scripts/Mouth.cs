@@ -11,7 +11,7 @@ public class Mouth : MonoBehaviour
     [SerializeField] AudioSource _as;
     [SerializeField] private AudioClip[] splashClip;
     [SerializeField] private AudioClip skewerClip;
-    [SerializeField] private Collider noiseCollider;
+    [SerializeField] private NoiseMaker noiseCollider;
     private void Start()
     {
         heronController = GetComponentInParent<HeronController>();
@@ -30,7 +30,8 @@ public class Mouth : MonoBehaviour
             splashPS.gameObject.transform.position = other.ClosestPoint(transform.position);
             splashPS.Play();
             _as.PlayOneShot(splashClip[Random.Range(0, splashClip.Length)]);
-            StartCoroutine(C_PingNoise());
+            noiseCollider.PingNoise(transform.position, 1f);
+            //StartCoroutine(C_PingNoise());
         }
 
         var foundFish = other.GetComponentInParent<FishController>();
