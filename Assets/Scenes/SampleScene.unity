@@ -985,21 +985,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2243786234585305856, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2243786234585305856, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2243786234585305856, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3997634472256526030, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
       propertyPath: m_Name
       value: Heron
+      objectReference: {fileID: 0}
+    - target: {fileID: 6125844388649269965, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -9,11 +9,14 @@ public class RippleSpawner : MonoBehaviour
     [SerializeField] HeronController heron;
     [SerializeField] Vector2 sizeRange = new Vector2(5, 15);
     [SerializeField] Vector2 lifetimeRange = new Vector2(1, 10);
+    [SerializeField] FootstepAudio footstepAudio;
+    [SerializeField] bool foot = true;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         StartCoroutine(C_SuppressAtStart());
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -22,8 +25,17 @@ public class RippleSpawner : MonoBehaviour
         {
             ps_ripple.transform.position = other.ClosestPoint(transform.position);
             var main = ps_ripple.main;
-            main.startSize = Mathf.Lerp(sizeRange.x, sizeRange.y, heron.moveValue.y);
-            main.startLifetime = Mathf.Lerp(lifetimeRange.x, lifetimeRange.y, heron.moveValue.y);            
+            if (foot)
+            {
+                main.startSize = Mathf.Lerp(sizeRange.x, sizeRange.y / 2, heron.moveValue.y);
+                main.startLifetime = Mathf.Lerp(lifetimeRange.x, lifetimeRange.y / 2, heron.moveValue.y);            
+                footstepAudio.PlayFootstep(heron.moveValue.y);
+            }
+            else
+            {
+                main.startSize = sizeRange.y;
+                main.startLifetime = lifetimeRange.y;
+            }
             ps_ripple.Play();
         }
     }

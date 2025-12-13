@@ -182,6 +182,7 @@ public class HeronController : MonoBehaviour
         Vector3 newCamPos = initialCamPositionLocal;
         newCamPos.x = initialCamPositionLocal.x + 5f * -moveHeadValue.x;
         newCamPos.y = initialCamPositionLocal.y + 5f * -moveHeadValue.y;
+
         if (newCamPos.y < 0)
         {
             newCamPos.y = 0;
@@ -191,6 +192,7 @@ public class HeronController : MonoBehaviour
         if(leftTriggerValue > 0)
         {
             newCamPos += cam.transform.forward * 1.5f;
+            newCamPos += Vector3.up * 3;
         }
 
         cam.transform.localPosition = Damp(cam.transform.localPosition, newCamPos, config.camBodyMovementSpeed, Time.deltaTime);
