@@ -932,6 +932,12 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 64f6cde4e43ffec45822e62d000bc3ed, type: 2}
   - {fileID: 2100000, guid: 1f3a5d307f9afda42b8f854dca1aa079, type: 2}
   - {fileID: 2100000, guid: 855437fd774218f4f8ea1d3e097453d4, type: 2}
+  squawks:
+  - {fileID: 8300000, guid: 06e159fd20c5278409bc3db83ecb09a0, type: 3}
+  - {fileID: 8300000, guid: bd6cd4971d58a6c4d9c981b687c81a34, type: 3}
+  - {fileID: 8300000, guid: aecc3286e8e210c479f9049b8a3c0606, type: 3}
+  - {fileID: 8300000, guid: 44dee4a1b43643a40b288a9cedc6e0b1, type: 3}
+  aSource: {fileID: 6983565801826816138}
 --- !u!198 &7973735194892439849
 ParticleSystem:
   m_ObjectHideFlags: 0
