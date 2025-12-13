@@ -15,7 +15,6 @@ public class Mouth : MonoBehaviour
     private void Start()
     {
         heronController = GetComponentInParent<HeronController>();
-        noiseCollider.gameObject.SetActive(false);
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -30,8 +29,7 @@ public class Mouth : MonoBehaviour
             splashPS.gameObject.transform.position = other.ClosestPoint(transform.position);
             splashPS.Play();
             _as.PlayOneShot(splashClip[Random.Range(0, splashClip.Length)]);
-            noiseCollider.PingNoise(transform.position, 1f);
-            //StartCoroutine(C_PingNoise());
+            noiseCollider.PingNoise(transform.position, 3f);
         }
 
         var foundFish = other.GetComponentInParent<FishController>();

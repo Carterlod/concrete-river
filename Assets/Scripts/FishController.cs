@@ -36,6 +36,7 @@ public class FishController : MonoBehaviour
 
     public void ScareMe(Transform loudNoiseSource)
     {
+        Debug.Log("fish scared");
         StopAllCoroutines();
         StartCoroutine(Run(loudNoiseSource)); 
     }

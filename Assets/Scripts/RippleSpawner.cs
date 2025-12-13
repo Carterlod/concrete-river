@@ -31,7 +31,7 @@ public class RippleSpawner : MonoBehaviour
                 main.startSize = Mathf.Lerp(sizeRange.x, sizeRange.y / 2, heron.moveValue.y);
                 main.startLifetime = Mathf.Lerp(lifetimeRange.x, lifetimeRange.y / 2, heron.moveValue.y);            
                 footstepAudio.PlayFootstep(heron.moveValue.y);
-                noiseMaker.PingNoise(transform.position, 0.5f);
+                noiseMaker.PingNoise(transform.position, 2f);
             }
             else
             {

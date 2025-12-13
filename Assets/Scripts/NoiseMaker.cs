@@ -13,9 +13,9 @@ public class NoiseMaker : MonoBehaviour
     {
         noiseCollider.gameObject.transform.position = noiseOrigin;
         noiseCollider.radius = noiseRadius;
-        noiseCollider.gameObject.SetActive(true);
+        noiseCollider.enabled = true ;
         yield return new WaitForSeconds(0.1f);
-        noiseCollider.gameObject.SetActive(false);
+        noiseCollider.enabled = false ;
         yield return null;
     }
 }

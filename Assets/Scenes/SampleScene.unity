@@ -1121,9 +1121,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2790776824175158275, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
+      propertyPath: gulpClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3ddd2f3fa0ef0a041a42a7ef446f8bc2, type: 3}
     - target: {fileID: 3997634472256526030, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
       propertyPath: m_Name
       value: Heron
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081003950054191221, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081003950054191221, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081003950054191221, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6541117679378353261, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
+      propertyPath: StimulatorAmount
+      value: 0.42649168
+      objectReference: {fileID: 0}
+    - target: {fileID: 7538532678804680018, guid: 378c7ce1ffcaaf8469a00aded10d8122, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3664,6 +3688,10 @@ PrefabInstance:
     - target: {fileID: 537522601859927624, guid: 6c5343ac62f8ac845bbaae4c1c573ff4, type: 3}
       propertyPath: m_LocalScale.z
       value: 3.9190292
+      objectReference: {fileID: 0}
+    - target: {fileID: 634175151558759440, guid: 6c5343ac62f8ac845bbaae4c1c573ff4, type: 3}
+      propertyPath: m_Center.z
+      value: -0.7
       objectReference: {fileID: 0}
     - target: {fileID: 2209542240210302760, guid: 6c5343ac62f8ac845bbaae4c1c573ff4, type: 3}
       propertyPath: m_Name
