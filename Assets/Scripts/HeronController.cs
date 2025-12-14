@@ -73,6 +73,8 @@ public class HeronController : MonoBehaviour
     [SerializeField]
     private HeronImageSpawner PS_herons;
 
+    [SerializeField] SwallowPrompt swallowPrompt;
+
 
     public void GrabFish(FishController fishController)
     {
@@ -94,6 +96,7 @@ public class HeronController : MonoBehaviour
         float currentJawX = config.openJawAngle;
         as_looping.Play();
         jawPivot.localEulerAngles = new Vector3(currentJawX, jawPivot.localEulerAngles.y, jawPivot.localEulerAngles.z);
+        swallowPrompt.gameObject.SetActive(true);
         float SnapValue()
         {
             return shoulderButtonRightAction.ReadValue<float>();
@@ -120,6 +123,7 @@ public class HeronController : MonoBehaviour
         jawPivot.localEulerAngles = new Vector3(startingJawY, jawPivot.localEulerAngles.y, jawPivot.localEulerAngles.z);
         as_looping.Stop();
         PS_herons.spawnArt();
+        swallowPrompt.gameObject.SetActive(false);
         hasFish = false;
     }
 
@@ -140,16 +144,17 @@ public class HeronController : MonoBehaviour
         //Body movement
         float leftTriggerValue = shoulderButtonLeftAction.ReadValue<float>();
         moveValue = moveBodyAction.ReadValue<Vector2>();
+        animator.speed = 1f;
         animator.SetBool("walking", false);
         if (leftTriggerValue == 0)
         {
             headMovePose = headRestPos.position;
             characterController.Move(root.forward * moveValue.y * Time.deltaTime * config.bodyMovementSpeed);
             characterController.gameObject.transform.Rotate(Vector3.up, config.bodyRotationSpeed * Time.deltaTime * smoothedHeadInput.x);
-            if (moveValue.x > 0 || moveValue.y > 0) 
+            if (moveValue.x != 0 || moveValue.y != 0) 
             { 
                 animator.SetBool("walking", true); 
-                animator.speed = moveValue.y;
+                animator.speed = Mathf.Abs( moveValue.y);
             }
         }
         else if (leftTriggerValue > 0)

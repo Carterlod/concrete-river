@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] float idleTimeBeforeUIEnabled = 2f;
     [SerializeField] GameObject uiParent;
 
+    
+
     bool AnyNonButtonInput()
     {
         foreach(var device in InputSystem.devices)
@@ -89,6 +91,8 @@ public class GameManager : MonoBehaviour
             uiParent.SetActive(true);
             uiOn = true;
         }
+
+
        
     }
 
